@@ -1,0 +1,24 @@
+{
+  "message" : [ "havis.llrpservice.data.message.ErrorMessage", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "ERROR_MESSAGE",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "status" : {
+      "parameterHeader" : {
+        "parameterType" : "LLRP_STATUS",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "statusCode" : "M_UNSUPPORTED_MESSAGE",
+      "errorDescriptionByteCount" : 0,
+      "errorDescription" : "Custom messages are not supported",
+      "fieldError" : null,
+      "parameterError" : null
+    }
+  } ],
+  "parameter" : null
+}

@@ -1,0 +1,69 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetReaderConfigResponse", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "GET_READER_CONFIG_RESPONSE",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "status" : {
+      "parameterHeader" : {
+        "parameterType" : "LLRP_STATUS",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "statusCode" : "M_SUCCESS",
+      "errorDescriptionByteCount" : 0,
+      "errorDescription" : "",
+      "fieldError" : null,
+      "parameterError" : null
+    },
+    "identification" : null,
+    "antennaPropertiesList" : null,
+    "antennaConfigurationList" : null,
+    "readerEventNotificationSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "READER_EVENT_NOTIFICATION_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "eventNotificationStateList" : [ "java.util.ArrayList", [ {
+        "parameterHeader" : {
+          "parameterType" : "EVENT_NOTIFICATION_STATE",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "eventType" : "ROSPEC_EVENT",
+        "notificationState" : false
+      },
+      {
+        "parameterHeader" : {
+          "parameterType" : "EVENT_NOTIFICATION_STATE",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "eventType" : "GPI_EVENT",
+        "notificationState" : false
+      },
+      {
+        "parameterHeader" : {
+          "parameterType" : "EVENT_NOTIFICATION_STATE",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "eventType" : "READER_EXCEPTION_EVENT",
+        "notificationState" : false
+      } ] ]
+    },
+    "roReportSpec" : null,
+    "accessReportSpec" : null,
+    "llrpConfigurationStateValue" : null,
+    "keepaliveSpec" : null,
+    "gpiPortCurrentStateList" : null,
+    "gpoWriteDataList" : null,
+    "eventAndReports" : null,
+    "customList" : null
+  } ],
+  "parameter" : null
+}

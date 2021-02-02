@@ -1,0 +1,25 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetROSpecsResponse", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "GET_ROSPECS_RESPONSE",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "status" : {
+      "parameterHeader" : {
+        "parameterType" : "LLRP_STATUS",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "statusCode" : "M_SUCCESS",
+      "errorDescriptionByteCount" : 0,
+      "errorDescription" : "",
+      "fieldError" : null,
+      "parameterError" : null
+    },
+    "roSpecList" : [ "java.util.ArrayList", [ ] ]
+  } ],
+  "parameter" : null
+}

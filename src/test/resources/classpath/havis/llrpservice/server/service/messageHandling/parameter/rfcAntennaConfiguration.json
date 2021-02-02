@@ -1,0 +1,10 @@
+{
+  "rfcCaps" : null,
+  "rfcConf" : [ "havis.device.rf.configuration.AntennaConfiguration", {
+    "id" : 1,
+    "receiveSensitivity" : 25,
+    "transmitPower" : 15,
+    "hopTableID" : 1,
+    "channelIndex" : 1
+  } ]
+}

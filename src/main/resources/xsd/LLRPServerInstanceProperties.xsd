@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:havis:llrp:server:properties:xsd:1"
+	elementFormDefault="qualified" xmlns="urn:havis:llrp:server:properties:xsd:1"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="urn:havis:llrp:server:common:xsd:1"
+	version="1.0">
+	<xs:annotation>
+		<xs:documentation>The description of server instance properties
+			structure. The properties are the static configuration part which
+			cannot be changed at runtime. The server instance properties file
+			must be placed in the class path. The default location is
+			havis-llrpservice/instances/&lt;instanceId&gt;/LLRPServerInstanceProperties.xml.
+			The server instance properties overwrite and extend the defaults from
+			the server properties (LLRPServerProperties.xsd).
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import namespace="urn:havis:llrp:server:common:xsd:1"
+		schemaLocation="./LLRPServerCommon.xsd" />
+	<xs:include schemaLocation="./LLRPServerPropertiesBase.xsd"></xs:include>
+
+
+	<xs:element name="LLRPServerInstanceProperties" type="LLRPServerInstancePropertiesType" />
+
+	<xs:complexType name="LLRPServerInstancePropertiesType">
+		<xs:sequence>
+			<xs:group ref="defaultsGroup" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server properties are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+		<xs:attribute name="schemaVersion" type="base:schemaVersionType">
+			<xs:annotation>
+				<xs:documentation> If the attribute does not exists the newest
+					supported version of the server implementation is assumed.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="instanceId" type="base:instanceIdType"
+			use="required">
+			<xs:annotation>
+				<xs:documentation>
+					The identifier of the instance. The same
+					identifier must be used for the instance configuration.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

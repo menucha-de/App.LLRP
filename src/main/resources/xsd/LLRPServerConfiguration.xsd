@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:havis:llrp:server:configuration:xsd:1"
+	elementFormDefault="qualified" xmlns="urn:havis:llrp:server:configuration:xsd:1"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="urn:havis:llrp:server:common:xsd:1"
+	version="1.1">
+	<xs:annotation>
+		<xs:documentation>The description of the server configuration. This
+			configuration is the dynamic configuration part which can be changed
+			at runtime. The initial server configuration must be placed in the
+			class path. The default location is
+			havis-llrpservice/LLRPServerConfiguration.xml. If the configuration
+			has been changed at runtime the new version is saved in a separate
+			file. The location of this file is determined by the property
+			"output/latestConfigurationBaseDir" (see LLRPServerProperties.xsd).
+			The server configuration contains the default settings for the
+			service instances (LLRPServerInstanceConfiguration.xsd).
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import namespace="urn:havis:llrp:server:common:xsd:1"
+		schemaLocation="./LLRPServerCommon.xsd" />
+	<xs:include schemaLocation="./LLRPServerConfigurationBase.xsd" />
+
+	<xs:element name="LLRPServerConfiguration" type="LLRPServerConfigurationType" />
+
+	<xs:complexType name="LLRPServerConfigurationType">
+		<xs:sequence>
+			<xs:element name="defaults" type="defaultsType">
+				<xs:annotation>
+					<xs:documentation>Default values for the server and instance
+						configurations
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="instanceConfigurations" type="instanceConfigurationsType" />
+			<xs:element name="persistence" type="serverPersistenceType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults are used.
+						The persistence can be disabled by disabling its times flags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemaVersion" type="common:schemaVersionType">
+			<xs:annotation>
+				<xs:documentation> If the attribute does not exist the newest
+					supported version of the server implementation is assumed.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="defaultsType">
+		<xs:sequence>
+			<xs:element name="interfaces" type="interfacesType" />
+			<xs:element name="persistence" type="persistenceType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the persistence is
+						disabled by default. The persistence can also be disabled by
+						disabling its times flags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="interfacesType">
+		<xs:sequence>
+			<xs:element name="LLRP" type="LLRPType" />
+			<xs:element name="systemController" type="systemControllerType" />
+			<xs:element name="RFC" type="RFCType" />
+			<xs:element name="GPIO" type="GPIOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist and it is not
+						configured explicitly for an instance then no GPIOs are provided
+						via LLRP.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LLRPType">
+		<xs:sequence>
+			<xs:group ref="addressGroup">
+				<xs:annotation>
+					<xs:documentation>The address for the LLRP service. A TCP/IP socket
+						is opened for a LLRP client. The host can be "localhost", 0.0.0.0
+						or the IP address of the local host. If multiple instances are
+						configured then for each instance a separate address must be set.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+			<xs:group ref="llrpPortProperties" />
+			<xs:group ref="tcpPortProperties" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="systemControllerType">
+		<xs:sequence>
+			<xs:group ref="addressGroup">
+				<xs:annotation>
+					<xs:documentation>The address of the RF controller. If the
+						Reflection API is used for creating a RF controller then the
+						address can be set to the instance for identification (see
+						reflection part for details). If the controller is connected via
+						OSGi then this address is the service filter (see OSGi part for
+						details). TCP/IP connections are not supported yet.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+			<xs:group ref="systemControllerPortProperties" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RFCType">
+		<xs:sequence>
+			<xs:group ref="addressGroup">
+				<xs:annotation>
+					<xs:documentation>The address of the RF controller. If the
+						Reflection API is used for creating a RF controller then the
+						address can be set to the instance for identification (see
+						reflection part for details). If the controller is connected via
+						OSGi then this address is the service filter (see OSGi part for
+						details). TCP/IP connections are not supported yet.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+			<xs:group ref="rfcPortProperties" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GPIOType">
+		<xs:sequence>
+			<xs:group ref="addressGroup">
+				<xs:annotation>
+					<xs:documentation>The address of the GPIO controller. If the
+						Reflection API is used for creating a GPIO controller then the
+						address can be set to the instance for identification (see
+						reflection part for details). If the controller is connected via
+						OSGi then this address is the service filter (see OSGi part for
+						details). TCP/IP connections are not supported yet.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+			<xs:group ref="gpioPortProperties" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="tcpPortProperties">
+		<xs:sequence>
+			<xs:element name="TCPReadBufferSize" type="xs:unsignedInt" />
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="persistenceType">
+		<xs:sequence>
+			<xs:element name="times" type="persistTimesType" />
+			<xs:element name="groupId" type="groupIdType" />
+			<xs:element name="cleanUp" type="cleanUpType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the cleanup is disabled
+						by default. The clean up can also be disabled by disabling its
+						times flags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="entities" type="entitiesType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="serverPersistenceType">
+		<xs:sequence>
+			<xs:element name="times" type="persistTimesType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults are used.
+						The persistence can be disabled by disabling the times flags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="groupId" type="groupIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cleanUp" type="cleanUpType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults are used.
+						The clean up can be disabled by disabling its times flags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="entities" type="entitiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="instanceConfigurationsType">
+		<xs:sequence>
+			<xs:element name="instanceConfigurationBaseDir" type="xs:string"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation> The directory path to the configuration files of
+						an instance. A relative file path starts at the directory with the
+						server properties file.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

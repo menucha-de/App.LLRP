@@ -1,0 +1,66 @@
+{
+  "message" : [ "havis.llrpservice.data.message.AddAccessSpec", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "ADD_ACCESSSPEC",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "accessSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "ACCESS_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "accessSpecId" : 1,
+      "antennaId" : 1,
+      "protocolId" : "EPC_GLOBAL_C1G2",
+      "currentState" : false,
+      "roSpecId" : 1,
+      "accessSpecStopTrigger" : {
+        "parameterHeader" : {
+          "parameterType" : "ACCESS_SPEC_STOP_TRIGGER",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "accessSpecStopTriggerType" : "OPERATION_COUNT",
+        "operationCountValue" : 1
+      },
+      "accessCommand" : {
+        "parameterHeader" : {
+          "parameterType" : "ACCESS_COMMAND",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "c1g2TagSpec" : {
+          "parameterHeader" : {
+            "parameterType" : "C1G2_TAG_SPEC",
+            "parameterLength" : 0,
+            "reserved" : 0
+          },
+          "tagPattern1" : {
+            "parameterHeader" : {
+              "parameterType" : "C1G2_TARGET_TAG",
+              "parameterLength" : 0,
+              "reserved" : 0
+            },
+            "pointer" : 0,
+            "maskBitCount" : 0,
+            "tagMask" : "",
+            "dataBitCount" : 0,
+            "tagData" : "",
+            "match" : false,
+            "memoryBank" : 0
+          },
+          "tagPattern2" : null
+        },
+        "opSpecList" : [ "java.util.ArrayList", [ ] ],
+        "customList" : null
+      },
+      "accessReportSpec" : null,
+      "customList" : null
+    }
+  } ],
+  "parameter" : null
+}

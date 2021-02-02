@@ -1,0 +1,10 @@
+#!/bin/sh
+
+URL="http://admin@localhost/rest/apps"
+PKG="40_havis.llrpservice-server.jar 40_havis.util.platform-@PLATFORM@.jar 50_jibx-run.jar 50_xpp3.jar 50_cloning.jar 50_objenesis.jar"
+
+for pkg in $PKG; do
+  busybox wget $URL/$pkg/unplug -q --spider
+done
+
+exit 0

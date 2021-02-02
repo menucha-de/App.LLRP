@@ -1,0 +1,51 @@
+{
+  "message" : [ "havis.llrpservice.data.message.AddROSpec", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "ADD_ROSPEC",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "roSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "RO_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "roSpecID" : 1,
+      "priority" : 1,
+      "currentState" : "ACTIVE",
+      "roBoundarySpec" : {
+        "parameterHeader" : {
+          "parameterType" : "RO_BOUNDARY_SPEC",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "roSStartTrigger" : {
+          "parameterHeader" : {
+            "parameterType" : "RO_SPEC_START_TRIGGER",
+            "parameterLength" : 0,
+            "reserved" : 0
+          },
+          "roSpecStartTriggerType" : "GPI",
+          "periodicTV" : null,
+          "gpiTV" : null
+        },
+        "roSStopTrigger" : {
+          "parameterHeader" : {
+            "parameterType" : "RO_SPEC_STOP_TRIGGER",
+            "parameterLength" : 0,
+            "reserved" : 0
+          },
+          "roSpecStopTriggerType" : "DURATION",
+          "durationTriggerValue" : 100,
+          "gpiTriggerValue" : null
+        }
+      },
+      "specList" : [ "java.util.ArrayList", [ ] ],
+      "roReportSpec" : null
+    }
+  } ],
+  "parameter" : null
+}

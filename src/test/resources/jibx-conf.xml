@@ -1,0 +1,5 @@
+<schema-set>
+  <schema-set package="havis.LLRP.generated" names="*.xsd">
+	<class-decorator class="org.jibx.schema.codegen.extend.SerializableDecorator"/>
+  </schema-set>
+</schema-set>

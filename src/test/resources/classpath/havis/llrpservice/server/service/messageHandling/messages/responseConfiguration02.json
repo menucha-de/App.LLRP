@@ -1,0 +1,43 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetReaderConfigResponse", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "GET_READER_CONFIG_RESPONSE",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "status" : {
+      "parameterHeader" : {
+        "parameterType" : "LLRP_STATUS",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "statusCode" : "M_SUCCESS",
+      "errorDescriptionByteCount" : 0,
+      "errorDescription" : "",
+      "fieldError" : null,
+      "parameterError" : null
+    },
+    "identification" : null,
+    "antennaPropertiesList" : null,
+    "antennaConfigurationList" : null,
+    "readerEventNotificationSpec" : null,
+    "roReportSpec" : null,
+    "accessReportSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "ACCESS_REPORT_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "accessReportTrigger" : "WHENEVER_ROREPORT_IS_GENERATED"
+    },
+    "llrpConfigurationStateValue" : null,
+    "keepaliveSpec" : null,
+    "gpiPortCurrentStateList" : null,
+    "gpoWriteDataList" : null,
+    "eventAndReports" : null,
+    "customList" : null
+  } ],
+  "parameter" : null
+}

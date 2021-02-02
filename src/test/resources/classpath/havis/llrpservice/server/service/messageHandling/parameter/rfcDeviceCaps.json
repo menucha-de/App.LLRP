@@ -1,0 +1,23 @@
+{
+  "rfcCaps" : [ "havis.device.rf.capabilities.DeviceCapabilities", {
+    "manufacturer" : 1,
+    "model" : 2,
+    "firmware" : "3.0",
+    "numberOfAntennas" : 4,
+    "maxReceiveSensitivity" : 3,
+    "receiveSensitivityTable" : {
+      "entryList" : [ "java.util.ArrayList", [ {
+        "index" : 1,
+        "receiveSensitivity" : 25
+      } ] ]
+    },
+    "antennaReceiveSensitivityRangeTable" : {
+      "entryList" : [ "java.util.ArrayList", [ {
+        "index" : 1,
+        "min" : 5,
+        "max" : 10
+      } ] ]
+    }
+  } ],
+  "rfcConf" : null
+}

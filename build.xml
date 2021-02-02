@@ -1,0 +1,314 @@
+<?xml version="1.0"?>
+<project name="havis.llrpservice-server" default="publish" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:if="ant:if">
+	<!-- Eclipse configuration:
+           Java Build Path -> Source -> src/main/java
+                                     -> src/main/resources/classpath
+                                     -> src/test/java -> Output folder: target/test/classes
+                                     -> src/test/resources/classpath -> Output folder: target/test/classes
+                                     -> Allow output folders for source folders
+                                     -> Default output folder: target/classes
+                           -> Libraries -> target/jibx/classes
+                                        -> lib/org.osgi.*.jar
+                                        -> all libraries from directory "lib"                                        
+                                        -> target/test/jibx/classes
+           TestNG plugin:
+             TestNG -> Output directory: /target/test/reports
+    -->
+
+	<property file="${basedir}/build.properties" />
+
+	<property name="app.name" value="havis.llrp-server" />
+	<property name="basename" value="${ant.project.name}" />
+	<property name="build.dir" location="${basedir}/target" />
+	<property name="build.dir.classes" location="${basedir}/target/classes" />
+	<property name="build.dir.test" location="${build.dir}/test" />
+	<property name="build.dir.test.classes" location="${build.dir}/test/classes" />
+	<property name="doc.dir" location="${build.dir}/doc" />
+
+	<property name="src.main.dir" location="${basedir}/src/main/java" />
+	<property name="src.test.dir" location="${basedir}/src/test/java" />
+	<property name="resources.dir" location="${basedir}/src/main/resources" />
+	<property name="resources.dir.classpath" location="${basedir}/src/main/resources/classpath" />
+
+	<property name="lib.dir" location="${basedir}/lib" />
+	<property name="dst.dir" location="${build.dir}/deb/opt/havis-apps/bundle" />
+
+	<property name="test.resources.dir" location="${basedir}/src/test/resources" />
+
+	<property file="${resources.dir}/build.properties" />
+	<property file="${resources.dir}/MANIFEST.MF" prefix="manifest" />
+
+	<property name="javac.version" value="8" />
+
+	<path id="build.classpath">
+		<fileset file="${lib.dir}/org.osgi.*.jar" />
+		<fileset dir="${lib.dir}" />
+	</path>
+
+	<filterset id="manifest" filtersfile="${resources.dir}/MANIFEST.MF" />
+
+	<!-- Checks if the build properties are set prints an error message otherwise -->
+	<target name="check.build.properties">
+		<condition property="ivy.resolver" else="local">
+			<isset property="ivy.resolver" />
+		</condition>
+		<fail message="Missing property 'api.url'. Does 'build.properties' file exists?" unless="api.url" />
+		<fail message="Missing property 'ivy.url'. Does 'build.properties' file exists?" unless="ivy.url" />
+
+		<sequential if:set="platform">
+			<condition property="arch" value="amd64">
+				<matches pattern="^linux-amd64$" string="${platform}" />
+			</condition>
+
+			<condition property="arch" value="armhf">
+				<matches pattern="^linux-arm$" string="${platform}" />
+			</condition>
+		</sequential>
+	</target>
+
+	<target name="clean-cache" description="Cleans ivy cache">
+		<ivy:cleancache />
+	</target>
+
+	<target name="clean" description="Cleans the project">
+		<delete dir="${build.dir}" />
+		<delete dir="${build.dir}/jibx" />
+		<delete dir="${lib.dir}" />
+	</target>
+
+	<target name="clean-all" depends="clean, clean-cache" description="Cleans the project and ivy cache" />
+
+	<target name="retrieve" depends="check.build.properties">
+		<ivy:retrieve log="quiet" />
+	</target>
+
+	<target name="jibx-taskdefs">
+		<taskdef name="bind" classname="org.jibx.binding.ant.CompileTask">
+			<classpath refid="build.classpath" />
+		</taskdef>
+	</target>
+
+	<!-- Checks if the existing JiBX classes are up to date -->
+	<target name="check.jibx">
+		<uptodate property="uptodate.jibx" targetfile="${build.dir}/jibx/src/binding.xml">
+			<srcfiles dir="${resources.dir}/xsd" includes="*.xsd" />
+		</uptodate>
+	</target>
+
+	<!-- Creates java classes for XSD files with JiBX. The classes are packaged to a JAR file. -->
+	<target name="jibx" depends="retrieve, check.jibx, jibx-taskdefs" unless="uptodate.jibx">
+		<!-- create java classes from XSD files -->
+		<java classname="org.jibx.schema.codegen.CodeGen" fork="yes" classpathref="build.classpath" failonerror="true">
+			<arg line="-t ${build.dir}/jibx/src" />
+			<arg line="-c ${resources.dir}/jibx-conf.xml" />
+			<arg line="${resources.dir}/xsd/*.xsd" />
+		</java>
+		<mkdir dir="${build.dir}/jibx/classes" />
+		<!-- compile java classes -->
+		<javac srcdir="${build.dir}/jibx/src" destdir="${build.dir}/jibx/classes" release="${javac.version}" debug="${javac.debug}" includeantruntime="false">
+			<classpath refid="build.classpath" />
+		</javac>
+		<delete dir="${build.dir}/jibx/classes" includes="*inding.xml" />
+		<!-- run JiBX binding compiler -->
+		<bind binding="${build.dir}/jibx/src/binding.xml" load="true">
+			<classpathset dir="${build.dir}/jibx/classes" />
+		</bind>
+	</target>
+
+	<!-- Checks if the existing JiBX classes are up to date -->
+	<target name="check.jibx-test">
+		<uptodate property="uptodate.jibx-test" targetfile="${build.dir.test}/jibx/src/binding.xml">
+			<srcfiles dir="${src.test.dir}" includes="**/*.xsd" />
+		</uptodate>
+	</target>
+
+	<!-- Creates java classes for XSD files with JiBX. The classes are packaged to a JAR file. -->
+	<target name="jibx-test" depends="compile, check.jibx-test" unless="uptodate.jibx-test">
+		<!-- create java classes from XSD files -->
+		<java classname="org.jibx.schema.codegen.CodeGen" fork="yes" classpathref="build.classpath" failonerror="true">
+			<arg line="-t ${build.dir.test}/jibx/src" />
+			<arg line="-c ${test.resources.dir}/jibx-conf.xml" />
+			<arg line="${test.resources.dir}/classpath/havis/llrpservice/common/serializer/*.xsd" />
+		</java>
+		<!-- compile java classes -->
+		<mkdir dir="${build.dir.test}/jibx/classes" />
+		<javac srcdir="${build.dir.test}/jibx/src" destdir="${build.dir.test}/jibx/classes" release="${javac.version}" debug="${javac.debug}" includeantruntime="false">
+			<classpath refid="build.classpath" />
+		</javac>
+		<delete dir="${build.dir.test}/jibx/classes" includes="*inding.xml" />
+		<!-- run JiBX binding compiler -->
+		<bind binding="${build.dir.test}/jibx/src/binding.xml" load="true">
+			<classpathset dir="${build.dir.test}/jibx/classes" />
+		</bind>
+	</target>
+
+
+	<macrodef name="update-conf" uri="havis.llrpservice-server.def">
+		<!-- configuration file for update -->
+		<attribute name="file" />
+		<!-- XSLT file -->
+		<attribute name="style" />
+		<sequential>
+			<move todir="${build.dir}/tmp/">
+				<fileset dir="${build.dir}" includes="conf/@{file}" />
+			</move>
+			<xslt in="${build.dir}/tmp/conf/@{file}" out="${build.dir}/conf/@{file}" style="${resources.dir}/xsl/@{style}" />
+		</sequential>
+	</macrodef>
+
+	<target name="prepare" depends="jibx-test">
+		<!-- compile java classes -->
+		<mkdir dir="${build.dir.test.classes}" />
+		<javac srcdir="${src.test.dir}" destdir="${build.dir.test.classes}" release="${javac.version}" debug="${javac.debug}" includeantruntime="false">
+			<classpath>
+				<!-- build libraries -->
+				<path refid="build.classpath" />
+				<!-- main classes -->
+				<pathelement location="${build.dir.classes}" />
+				<!-- jibx classes -->
+				<pathelement location="${build.dir}/jibx/classes" />
+				<pathelement location="${build.dir.test}/jibx/classes" />
+			</classpath>
+		</javac>
+		<!-- add all classpath resources -->
+		<copy todir="${build.dir.test.classes}">
+			<fileset dir="${test.resources.dir}/classpath" />
+		</copy>
+	</target>
+
+	<target name="test" depends="prepare" description="Runs the unit tests" unless="${skip.test}">
+		<!-- run testng -->
+		<taskdef name="testng" classname="org.testng.TestNGAntTask" classpathref="build.classpath" />
+		<testng outputDir="${build.dir.test}/reports" workingdir="${build.dir.test}">
+			<classpath>
+				<!-- build libraries -->
+				<path refid="build.classpath" />
+				<!-- main classes + resources -->
+				<pathelement location="${build.dir.classes}" />
+				<!-- test classes -->
+				<pathelement location="${build.dir.test.classes}" />
+				<!-- jibx classes -->
+				<pathelement location="${build.dir}/jibx/classes" />
+				<pathelement location="${build.dir.test}/jibx/classes" />
+			</classpath>
+			<xmlfileset dir="${basedir}" includes="**/testng.xml" />
+			<jvmarg line="-noverify -javaagent:${lib.dir}/jmockit-${jmockit.version}.jar -Djmockit-coverage-outputDir=${build.dir.test}/reports/coverage -Djmockit-coverage-srcDirs=${src.main.dir} -Djmockit-coverage-metrics=all" />
+		</testng>
+	</target>
+
+	<!-- Compiles the java source code using javac -->
+	<target name="compile" depends="jibx">
+		<mkdir dir="${build.dir.classes}" />
+		<javac srcdir="${src.main.dir}" destdir="${build.dir.classes}" fork="true" release="${javac.version}" debug="${javac.debug}" includeantruntime="false">
+			<classpath>
+				<!-- build libraries -->
+				<path refid="build.classpath" />
+				<pathelement location="${build.dir}/jibx/classes" />
+			</classpath>
+		</javac>
+		<!-- add all classpath resources -->
+		<copy todir="${build.dir.classes}">
+			<fileset dir="${resources.dir.classpath}" excludes="OSGI-INF/${basename}.properties" />
+		</copy>
+	</target>
+
+	<target name="jar" depends="compile" description="Creates the binary JAR">
+		<copy file="${resources.dir.classpath}/OSGI-INF/${basename}.properties" todir="${build.dir.classes}/OSGI-INF/">
+			<filterset refid="manifest" />
+		</copy>
+		<!-- create binary JAR -->
+		<jar jarfile="${build.dir}/${basename}.jar" manifest="${resources.dir}/MANIFEST.MF">
+			<fileset dir="${build.dir.classes}" />
+			<fileset dir="${build.dir}/jibx/classes" />
+		</jar>
+	</target>
+
+	<target name="jar-src" depends="compile" description="Creates the source JAR">
+		<!-- create source JAR -->
+		<jar jarfile="${build.dir}/${basename}-sources.jar">
+			<fileset dir="${src.main.dir}" />
+			<fileset dir="${build.dir}/jibx/src" />
+		</jar>
+	</target>
+
+	<target name="jar-doc">
+		<!-- create javadoc JAR -->
+		<javadoc destdir="${doc.dir}" author="true" version="true" use="true" windowtitle="${javadoc.windowtitle}" doctitle="${javadoc.doctitle}" bottom="${javadoc.buttom}">
+			<packageset dir="${src.main.dir}" defaultexcludes="yes" />
+			<classpath>
+				<!-- build libraries -->
+				<path refid="build.classpath" />
+				<!-- jibx classes -->
+				<pathelement location="${build.dir}/jibx/classes" />
+			</classpath>
+			<group title="Packages" packages="havis.llrpservice.*" />
+			<link offline="true" href="http://docs.oracle.com/javase/7/docs/api/" packagelistURL="${api.url}/javase/7/" />
+		</javadoc>
+		<jar jarfile="${build.dir}/${basename}-javadoc.jar" basedir="${doc.dir}" />
+	</target>
+
+	<target name="deb" depends="jar" description="Creates a deb">
+		<copy file="${build.dir}/${basename}.jar" tofile="${dst.dir}/40_${basename}.jar" />
+
+		<ivy:resolve file="ivy.xml" />
+		<ivy:retrieve pattern="${dst.dir}/[artifact].[ext]" conf="runtime">
+			<firstmatchmapper>
+				<globmapper from="${dst.dir}/havis.util.platform-${platform}.jar" to="${dst.dir}/40_havis.util.platform-${platform}.jar" />
+				<globmapper from="${dst.dir}/*.jar" to="${dst.dir}/50_*.jar" />
+			</firstmatchmapper>
+		</ivy:retrieve>
+
+		<copy todir="${build.dir}/deb">
+			<fileset dir="${resources.dir}/deb/" includes="**/*.html DEBIAN/*" />
+			<filterset refid="manifest" />
+			<filterset>
+				<filter token="ARCH" value="${arch}" />
+				<filter token="PLATFORM" value="${platform}" />
+			</filterset>
+		</copy>
+
+		<copy todir="${build.dir}/deb">
+			<fileset dir="${resources.dir}/deb/" excludes="**/*.html DEBIAN/*" />
+		</copy>
+
+		<chmod perm="755" type="file">
+			<fileset dir="${build.dir}/deb/DEBIAN">
+				<include name="preinst" />
+				<include name="postinst" />
+				<include name="prerm" />
+				<include name="postrm" />
+			</fileset>
+		</chmod>
+		<mkdir dir="${build.dir}/tar" />
+		<exec executable="fakeroot">
+			<arg value="dpkg" />
+			<arg value="-b" />
+			<arg value="${build.dir}/deb" />
+			<arg value="${build.dir}/tar/${app.name}.deb" />
+		</exec>
+	</target>
+
+	<target name="app" depends="deb">
+		<exec executable="fakeroot">
+			<arg value="tar" />
+			<arg value="cfC" />
+			<arg value="${build.dir}/${app.name}.tar" />
+			<arg value="${build.dir}/tar" />
+			<arg value="." />
+		</exec>
+		<concat destfile="${build.dir}/${app.name}.app" binary="yes">
+			<fileset file="${resources.dir}/make" />
+			<fileset file="${build.dir}/${app.name}.tar" />
+		</concat>
+	</target>
+
+	<target name="publish" depends="app, jar-src, jar-doc" description="Publishes the JAR to the repository">
+		<ivy:resolve file="${resources.dir}/ivy.xml" />
+
+		<ivy:publish resolver="${ivy.resolver}" pubrevision="${manifest.Bundle-Version}" status="integration" overwrite="true">
+			<artifacts pattern="${build.dir}/[artifact].[ext]" />
+		</ivy:publish>
+	</target>
+
+</project>
+

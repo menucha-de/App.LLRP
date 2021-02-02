@@ -1,0 +1,73 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetReaderConfigResponse", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "GET_READER_CONFIG_RESPONSE",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "status" : {
+      "parameterHeader" : {
+        "parameterType" : "LLRP_STATUS",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "statusCode" : "M_SUCCESS",
+      "errorDescriptionByteCount" : 0,
+      "errorDescription" : "",
+      "fieldError" : null,
+      "parameterError" : null
+    },
+    "identification" : null,
+    "antennaPropertiesList" : null,
+    "antennaConfigurationList" : null,
+    "readerEventNotificationSpec" : null,
+    "roReportSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "RO_REPORT_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "roReportTrigger" : "UPON_N_TAGREPORTDATA_PARAMETERS_OR_END_OF_ROSPEC",
+      "n" : 1,
+      "tagReportContentSelector" : {
+        "parameterHeader" : {
+          "parameterType" : "TAG_REPORT_CONTENT_SELECTOR",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "enableROSpecID" : true,
+        "enableSpecIndex" : true,
+        "enableInventoryParameterSpecID" : true,
+        "enableAntennaID" : true,
+        "enableChannelIndex" : true,
+        "enablePeakRSSI" : true,
+        "enableFirstSeenTimestamp" : false,
+        "enableLastSeenTimestamp" : false,
+        "enableTagSeenCount" : false,
+        "enableAccessSpecID" : true,
+        "c1g2EPCMemorySelectorList" : [ "java.util.ArrayList", [ {
+          "parameterHeader" : {
+            "parameterType" : "C1G2_EPC_MEMORY_SELECTOR",
+            "parameterLength" : 0,
+            "reserved" : 0
+          },
+          "enableCRC" : true,
+          "enablePCBits" : true,
+          "enableXPCBits" : false
+        } ] ],
+        "cusList" : null
+      },
+      "customList" : null
+    },
+    "accessReportSpec" : null,
+    "llrpConfigurationStateValue" : null,
+    "keepaliveSpec" : null,
+    "gpiPortCurrentStateList" : null,
+    "gpoWriteDataList" : null,
+    "eventAndReports" : null,
+    "customList" : null
+  } ],
+  "parameter" : null
+}

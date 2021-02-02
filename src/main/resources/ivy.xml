@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd" xmlns:e="http://ant.apache.org/ivy/extra">
+
+	<info organisation="havis/llrpservice" module="server-${platform}" default="true" e:app="havis.llrp-server" />
+
+	<configurations>
+		<conf name="default" />
+		<conf name="doc" />
+		<conf name="src" />
+		<conf name="app" />
+	</configurations>
+
+	<publications>
+		<artifact name="havis.llrpservice-server" conf="default" />
+		<artifact name="havis.llrpservice-server-javadoc" conf="doc" />
+		<artifact name="havis.llrpservice-server-sources" conf="src" />
+		<artifact name="havis.llrp-server" type="app" conf="app" />
+	</publications>
+
+	<dependencies>
+		<dependency org="havis/device/io" name="api" rev="${havis.version}" conf="default" />
+		<dependency org="havis/device/rf" name="api" rev="${havis.version}" conf="default" />
+		<dependency org="havis/llrpservice" name="data" rev="${havis.version}" conf="default" />
+		<dependency org="uk/com/robust-it" name="cloning" rev="${cloning.version}" conf="default" />
+	</dependencies>
+
+</ivy-module>

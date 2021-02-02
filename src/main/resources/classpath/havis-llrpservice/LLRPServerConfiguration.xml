@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LLRPServerConfiguration xmlns="urn:havis:llrp:server:configuration:xsd:1"
+	xmlns:c="urn:havis:llrp:server:configuration:xsd:1">
+	<defaults>
+		<interfaces>
+			<LLRP>
+				<host>::0</host>
+				<port>5084</port>
+				<openCloseTimeout>3000</openCloseTimeout>
+				<TCPReadBufferSize>1024</TCPReadBufferSize>
+			</LLRP>
+			<systemController>
+				<c:host>havis.util.platform</c:host>
+				<port>4321</port>
+				<openCloseTimeout>5000</openCloseTimeout>
+				<c:OSGi />
+			</systemController>
+			<RFC>
+				<c:host>havis.device.rf.daemon</c:host>
+				<port>1234</port>
+				<openCloseTimeout>5000</openCloseTimeout>
+				<callbackTimeout>3000</callbackTimeout>
+				<c:OSGi />
+			</RFC>
+			<GPIO>
+				<c:host>havis.device.io.daemon</c:host>
+				<port>8765</port>
+				<openCloseTimeout>5000</openCloseTimeout>
+				<c:OSGi />
+			</GPIO>
+		</interfaces>
+	</defaults>
+	<instanceConfigurations>
+		<instanceConfigurationBaseDir>instances/default
+		</instanceConfigurationBaseDir>
+	</instanceConfigurations>
+</LLRPServerConfiguration>

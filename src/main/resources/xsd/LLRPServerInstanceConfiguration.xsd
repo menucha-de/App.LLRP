@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:havis:llrp:server:configuration:xsd:1"
+	elementFormDefault="qualified" xmlns="urn:havis:llrp:server:configuration:xsd:1"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="urn:havis:llrp:server:common:xsd:1"
+	version="1.1">
+	<xs:annotation>
+		<xs:documentation>The description of a server instance configuration.
+			This configuration is the dynamic configuration part which can be
+			changed at runtime. The initial server instance configuration must be
+			placed in the class path. The default location is
+			havis-llrpservice/instances/&lt;instanceId&gt;/LLRPServerInstanceConfiguration.xml.
+			If the configuration has been changed at runtime the new version is
+			saved in a separate file. The location of this file is determined by
+			the property "output/latestConfigurationBaseDir" (see
+			lLRPServerProperties.xsd). The server instance configuration
+			overwrites and extends the defaults from the server configuration
+			(LLRPServerConfiguration.xsd).
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import namespace="urn:havis:llrp:server:common:xsd:1"
+		schemaLocation="./LLRPServerCommon.xsd" />
+	<xs:include schemaLocation="./LLRPServerConfigurationBase.xsd" />
+
+	<xs:element name="LLRPServerInstanceConfiguration" type="LLRPServerInstanceConfigurationType">
+	</xs:element>
+
+	<xs:complexType name="LLRPServerInstanceConfigurationType">
+		<xs:sequence>
+			<xs:element name="interfaces" type="instanceInterfacesType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="persistence" type="instancePersistenceType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server configuration are used. The persistence can be disabled by
+						disabling its times flags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="instanceId" type="common:instanceIdType"
+			use="required">
+			<xs:annotation>
+				<xs:documentation>The identifier of the instance. The same
+					identifier must be used for the instance properties.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="schemaVersion" type="common:schemaVersionType">
+			<xs:annotation>
+				<xs:documentation>If the attribute does not exists the newest
+					supported version of the server implementation is assumed.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="instanceInterfacesType">
+		<xs:sequence>
+			<xs:element name="LLRP" type="instanceLLRPType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="systemController" type="instanceSystemControllerType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RFC" type="instanceRFCType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GPIO" type="instanceGPIOType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>If the tag does not exist the defaults from the
+                        server configuration are used.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="instanceLLRPType">
+		<xs:sequence>
+			<xs:group ref="addressGroup" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The address for the LLRP service. A TCP/IP socket
+						is opened for a LLRP client. The host can be "localhost", 0.0.0.0
+						or the IP address of the local host. If the tag does not exist the
+						defaults from the server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+			<xs:group ref="llrpPortProperties" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the group of tags does not exist the defaults
+						from the server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="instanceSystemControllerType">
+		<xs:sequence>
+			<xs:group ref="addressGroup" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The address of the system controller. If the
+						Reflection API is used for creating a system controller then the
+						address can be set to the instance for identification (see
+						reflection part for details). If the controller is connected via
+						OSGi then this address is the service filter (see OSGi part for
+						details). TCP/IP connections are not supported. If the tag does
+						not exist the defaults from the server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+			<xs:group ref="systemControllerPortProperties" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the group of tags does not exist the defaults
+						from the server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="instanceRFCType">
+		<xs:sequence>
+			<xs:group ref="addressGroup" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The address of the RF controller. If the
+						Reflection API is used for creating a RF controller then the
+						address can be set to the instance for identification (see
+						reflection part for details). If the controller is connected via
+						OSGi then this address is the service filter (see OSGi part for
+						details). TCP/IP connections are not supported. If the tag does
+						not exist the defaults from the server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+			<xs:group ref="rfcPortProperties" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the group of tags does not exist the defaults
+						from the server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="instanceGPIOType">
+        <xs:sequence>
+            <xs:group ref="addressGroup" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>The address of the GPIO controller. If the
+                        Reflection API is used for creating a GPIO controller then the
+                        address can be set to the instance for identification (see
+                        reflection part for details). If the controller is connected via
+                        OSGi then this address is the service filter (see OSGi part for
+                        details). TCP/IP connections are not supported. If the tag does
+                        not exist the defaults from the server configuration are used.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:group>
+            <xs:group ref="gpioPortProperties" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>If the group of tags does not exist the defaults
+                        from the server configuration are used.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:group>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="instancePersistenceType">
+		<xs:sequence>
+			<xs:element name="times" type="persistTimesType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server configuration are used. The persistence can be disabled by
+						disabling the times flags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="groupId" type="groupIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cleanUp" type="cleanUpType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation> If the tag does not exist the defaults from the
+						server configuration are used. The clean up can be disabled by
+						disabling its times flags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="entities" type="entitiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults from the
+						server configuration are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

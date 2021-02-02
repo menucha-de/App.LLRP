@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+	<info organisation="havis/llrpservice" module="server" default="true" />
+
+	<configurations>
+		<conf name="default" />
+		<conf name="runtime" />
+	</configurations>
+
+	<dependencies>
+		<dependency org="com/beust" name="jcommander" rev="${jcommander.version}" conf="default" />
+		<dependency org="org/objenesis" name="objenesis" rev="${objenesis.version}" conf="default,runtime->default" />
+		<dependency org="com/fasterxml/jackson/core" name="jackson-databind" rev="${jackson.version}" conf="default" />
+		<dependency org="havis/llrpservice" name="data" rev="${havis.version}" conf="default" />
+		<dependency org="havis/device/io" name="api" rev="${havis.version}" conf="default" />
+		<dependency org="havis/device/rf" name="api" rev="${havis.version}" conf="default" />
+		<dependency org="havis/util" name="platform-${platform}" rev="${havis.version}" conf="default,runtime->default" />
+		<dependency org="org/jmockit" name="jmockit" rev="${jmockit.version}" conf="default" />
+		<dependency org="org/jmockit" name="jmockit-coverage" rev="${jmockit.version}" conf="default" />
+		<dependency org="org/osgi" name="org.osgi.core" rev="${osgi.version}" conf="default" />
+		<dependency org="org/osgi" name="org.osgi.util.tracker" rev="${osgi-tracker.version}" conf="default" />
+		<dependency org="org/testng" name="testng" rev="${testng.version}" conf="default" />
+		<dependency org="uk/com/robust-it" name="cloning" rev="${cloning.version}" conf="default,runtime->default" />
+		<dependency org="org/jibx" name="jibx-run" rev="${jibx.version}" conf="runtime->default" transitive="false" />
+		<dependency org="xpp3" name="xpp3" rev="${xpp3.version}" conf="runtime->default" transitive="false" />
+		<dependency org="org/jibx" name="jibx-tools" rev="${jibx.version}" conf="default" />
+	</dependencies>
+
+</ivy-module>

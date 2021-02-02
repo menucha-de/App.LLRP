@@ -1,0 +1,17 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetReaderConfig", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_1",
+      "messageType" : "GET_READER_CONFIG",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "antennaID" : 0,
+    "requestedData" : "ALL",
+    "gpiPortNum" : 0,
+    "gpoPortNum" : 0,
+    "customList" : null
+  } ],
+  "parameter" : null
+}

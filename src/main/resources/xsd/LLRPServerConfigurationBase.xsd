@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:havis:llrp:server:configuration:xsd:1"
+	elementFormDefault="qualified" xmlns="urn:havis:llrp:server:configuration:xsd:1"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.1">
+
+	<xs:group name="addressGroup">
+		<xs:sequence>
+			<xs:element name="host" type="xs:string" />
+			<xs:element name="port" type="xs:unsignedInt" />
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="reflectionType">
+		<xs:sequence>
+			<xs:element name="controllerClassName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The full class name of the main class of the
+						controller.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addressSetterMethodName" type="xs:string"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The method name of the main class of the
+						controller which is used to set the configured address. The
+						provided method signature must be "public void methodName(String
+						host, int port)"
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="osgiType">
+		<xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="llrpPortProperties">
+		<xs:sequence>
+			<xs:element name="openCloseTimeout" type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation>The time out in milliseconds for opening or
+						closing the LLRP server
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+
+	<xs:group name="systemControllerPortProperties">
+		<xs:sequence>
+			<xs:element name="openCloseTimeout" type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation>The time out in milliseconds for opening or
+						closing the connection to the system controller
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="reflection" type="reflectionType">
+					<xs:annotation>
+						<xs:documentation>A platform is instantiated via the Java
+							Reflection API. The platform class must implement the interface
+							havis.util.platform.Platform.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OSGi" type="osgiType">
+					<xs:annotation>
+						<xs:documentation>A platform instance is get via the OSGi
+							connector (not implemented yet).
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:group name="rfcPortProperties">
+		<xs:sequence>
+			<xs:element name="openCloseTimeout" type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation>The time out in milliseconds for opening or
+						closing the connection to the RF controller
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="callbackTimeout" type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation>The time out in milliseconds for call backs from
+						the RF controller
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="reflection" type="reflectionType">
+					<xs:annotation>
+						<xs:documentation>A RF controller is instantiated via the Java
+							Reflection API. The controller class must implement the interface
+							havis.device.rf.RFController.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OSGi" type="osgiType">
+					<xs:annotation>
+						<xs:documentation>A RF controller instance is get via the OSGi
+							connector. When a connection to a RF controller is being opened
+							the OSGi connector looks for a service class
+							havis.device.rf.RFControllerFactory with matching
+							filter "(&amp;(host=%s)(port=%d))" and requests a RF controller
+							instance. The acquired instance is released when the connection
+							is being closed.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:group name="gpioPortProperties">
+		<xs:sequence>
+			<xs:element name="openCloseTimeout" type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation>The time out in milliseconds for opening or
+						closing the connection to the GPIO controller
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="reflection" type="reflectionType">
+					<xs:annotation>
+						<xs:documentation>A GPIO controller is instantiated via the Java
+							Reflection API. The controller class must implement the interface
+							havis.device.io.IODevice
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OSGi" type="osgiType">
+					<xs:annotation>
+						<xs:documentation>A GPIO controller instance is get via the OSGi
+							connector. When a connection to a GPIO controller is being opened
+							the OSGi connector looks for a service class
+							havis.device.io.IODeviceFactory with matching
+							filter "(&amp;(host=%s)(port=%d))" and requests a GPIO controller
+							instance. The acquired instance is released when the connection
+							is being closed.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="entitiesType">
+		<xs:sequence>
+			<xs:element name="entity" type="entityType" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="entityType">
+		<xs:sequence>
+			<xs:element name="className" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The full name of a persistable class. Server
+						configuration:
+						havis.llrpservice.xml.configuration.LLRPServerConfigurationType.
+						Server instance configuration:
+						havis.llrpservice.xml.configuration.LLRPServerInstanceConfigurationType,
+                        havis.llrpservice.server.service.data.ROAccessReportEntity 
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="output" type="outputType" />
+			<xs:element name="times" type="persistTimesType"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults are used
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="groupId" type="groupIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults are used
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cleanUp" type="cleanUpType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the tag does not exist the defaults are used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="cleanUpType">
+		<xs:sequence>
+			<xs:element name="times" type="cleanUpTimesType" />
+			<xs:element name="maxCreationDateInterval" minOccurs="0"
+				type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation>Groups with a creation date before this time
+						interval (in seconds) are deleted. The end of the time interval is
+						the time when the clean up is started. If the tag does not exist
+						or the interval is 0 then all files are deleted.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="groupIdType">
+		<xs:sequence>
+			<xs:element name="baseFormat" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The format of a group name eg.
+						yyyy'_'MM'_'dd'T'HH'_'mm'_'ss'_'SSS (see
+						java.text.SimpleDateFormat for details)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="suffix" type="suffixType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A suffix for the group name
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="suffixType">
+		<xs:sequence>
+			<xs:element name="serialNumber" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>A generated serial number which makes the group
+						name unique in the storage
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="persistTimesType">
+		<xs:sequence>
+			<xs:element name="manual" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true if the entity shall be persisted after a
+						user has triggered it manually eg. via a management interface
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="afterChanges" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true if the entity shall be persisted each time
+						after the entity data has been changed
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="cleanUpTimesType">
+		<xs:sequence>
+			<xs:element name="manual" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true if a clean up shall be performed after a
+						user has triggered it manually eg. via a management interface
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="afterFlush" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true if a clean up shall be performed each time
+						after an entity has been flushed to the storage
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="outputType">
+		<xs:choice>
+			<xs:element name="file" type="fileType" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="fileType">
+		<xs:sequence>
+			<xs:group ref="fileProperties" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="fileProperties">
+		<xs:sequence>
+			<xs:element name="baseDir" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The base output directory. For each group a sub
+						directory is created. A relative file path starts at the directory
+						with the configuration file.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="fileTypeType" />
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="fileTypeType">
+		<xs:choice>
+			<xs:element name="XML" type="XMLType" />
+			<xs:element name="JSON" type="JSONType" />
+			<xs:element name="javaBinary" type="javaBinaryType" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="JSONType">
+		<xs:sequence>
+			<xs:element name="encoding" type="encodingEnumeration" />
+			<xs:element minOccurs="0" name="mixInClassName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation> The full name of the class which provides
+						informations for the de-/serialization of entities:
+						havis.llrpservice.csc.llrp.json.LLRPJacksonMixIns
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="XMLType">
+		<xs:sequence>
+			<xs:element name="encoding" type="encodingEnumeration" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="javaBinaryType">
+	</xs:complexType>
+
+	<xs:simpleType name="encodingEnumeration">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UTF8" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

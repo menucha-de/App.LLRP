@@ -1,0 +1,23 @@
+{
+  "message" : [ "havis.llrpservice.data.message.SetReaderConfig", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "SET_READER_CONFIG",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "resetToFactoryDefaults" : false,
+    "readerEventNotificationSpec" : null,
+    "antennaPropertiesList" : null,
+    "antennaConfigurationList" : null,
+    "roReportSpec" : null,
+    "accessReportSpec" : null,
+    "keepaliveSpec" : null,
+    "gpoWriteDataList" : null,
+    "gpiPortCurrentStateList" : null,
+    "eventAndReports" : null,
+    "customList" : null
+  } ],
+  "parameter" : null
+}

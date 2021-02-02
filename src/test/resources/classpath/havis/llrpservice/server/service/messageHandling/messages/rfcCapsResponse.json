@@ -1,0 +1,50 @@
+{
+  "rfcCaps" : null,
+  "rfcConf" : null,
+  "rfcMessage" : [ "havis.llrpservice.sbc.rfc.message.GetCapabilitiesResponse", {
+    "messageHeader" : {
+      "messageType" : "GET_CAPABILITIES_RESPONSE",
+      "id" : 1
+    },
+    "exception" : null,
+    "capabilities" : [ "java.util.ArrayList", [ [ "havis.device.rf.capabilities.RegulatoryCapabilities", {
+      "countryCode" : 136,
+      "communicationStandard" : 2,
+      "transmitPowerTable" : {
+        "entryList" : [ "java.util.ArrayList", [ {
+          "index" : 1,
+          "transmitPower" : 5
+        } ] ]
+      },
+      "hopping" : false,
+      "freqHopTable" : {
+        "entryList" : [ "java.util.ArrayList", [ {
+          "index" : 1,
+          "freqList" : [ "java.util.ArrayList", [ 10 ] ]
+        } ] ]
+      },
+      "fixedFreqTable" : {
+        "freqList" : [ "java.util.ArrayList", [ 3 ] ]
+      }
+    } ], [ "havis.device.rf.capabilities.DeviceCapabilities", {
+      "manufacturer" : 1,
+      "model" : 2,
+      "firmware" : "3.0",
+      "numberOfAntennas" : 4,
+      "maxReceiveSensitivity" : 3,
+      "receiveSensitivityTable" : {
+        "entryList" : [ "java.util.ArrayList", [ {
+          "index" : 1,
+          "receiveSensitivity" : 25
+        } ] ]
+      },
+      "antennaReceiveSensitivityRangeTable" : {
+        "entryList" : [ "java.util.ArrayList", [ {
+          "index" : 1,
+          "min" : 5,
+          "max" : 10
+        } ] ]
+      }
+    } ] ] ]
+  } ]
+}

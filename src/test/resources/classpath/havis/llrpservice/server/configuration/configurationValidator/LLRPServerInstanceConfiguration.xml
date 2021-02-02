@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LLRPServerInstanceConfiguration
+	xmlns="urn:havis:llrp:server:configuration:xsd:1" instanceId="default"
+	schemaVersion="1.0">
+	<interfaces>
+		<RFC>
+			<host>localhost</host>
+			<port>1234</port>
+			<openCloseTimeout>3000</openCloseTimeout>
+			<callbackTimeout>3000</callbackTimeout>
+			<reflection>
+				<controllerClassName>havis.llrpservice.server.stub.RFDeviceStub</controllerClassName>
+			</reflection>
+		</RFC>
+	</interfaces>
+	<persistence>
+		<groupId>
+			<baseFormat>yyyy'_'MM'_'dd'T'HH'_'mm'_'ss'_'SSS'__'</baseFormat>
+		</groupId>
+		<entities>
+			<entity>
+				<className>havis.llrpservice.xml.configuration.LLRPServerInstanceConfigurationType
+				</className>
+				<output>
+					<file>
+						<baseDir>../../../../var/lib/havis-llrpservice/repository/default/LLRPServerInstanceConfiguration
+						</baseDir>
+						<type>
+							<JSON>
+								<encoding>UTF8</encoding>
+								<mixInClassName>havis.llrpservice.csc.llrp.json.LLRPJacksonMixIns
+								</mixInClassName>
+							</JSON>
+						</type>
+					</file>
+				</output>
+				<groupId>
+					<baseFormat>yyyy'_'MM'_'dd'T'HH'_'mm'_'ss'_'SSS'__'</baseFormat>
+				</groupId>
+			</entity>
+		</entities>
+	</persistence>
+</LLRPServerInstanceConfiguration>

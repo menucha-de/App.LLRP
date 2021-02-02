@@ -1,0 +1,13 @@
+{
+  "message" : null,
+  "parameter" : [ "havis.llrpservice.data.message.parameter.AntennaProperties", {
+    "parameterHeader" : {
+      "parameterType" : "ANTENNA_PROPERTIES",
+      "parameterLength" : 0,
+      "reserved" : 0
+    },
+    "connected" : true,
+    "antennaID" : 1,
+    "antennaGain" : 25
+  } ]
+}

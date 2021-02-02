@@ -1,0 +1,54 @@
+name: Publish app
+
+on:
+  workflow_dispatch:
+    inputs:
+      arch:
+        description: 'Architecture'
+        default: 'amd64 armhf'
+      release:
+        description: 'Release'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Publish jar
+        id: build
+        uses: peramic/actions/build-stretch@v1
+        with:
+          arch: ${{ github.event.inputs.arch }}
+          script: ./mkapp
+          token: ${{ secrets.ACTIONS }}
+          release: ${{ github.event.inputs.release }}
+      - name: Create Release
+        if: ${{ github.event.inputs.release }}
+        id: release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.release }}
+          release_name: Release ${{ github.event.inputs.release }}
+      - name: Upload amd64 Release Asset
+        if: ${{ github.event.inputs.release && steps.build.outputs.APP_amd64 }} 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: ${{ steps.build.outputs.APP_amd64 }}
+          asset_name: ${{ steps.build.outputs.APP_amd64 }}
+          asset_content_type: application/octet-stream
+      - name: Upload armhf Release Asset
+        if: ${{ github.event.inputs.release && steps.build.outputs.APP_armhf }}
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: ${{ steps.build.outputs.APP_armhf }}
+          asset_name: ${{ steps.build.outputs.APP_armhf }}
+          asset_content_type: application/octet-stream

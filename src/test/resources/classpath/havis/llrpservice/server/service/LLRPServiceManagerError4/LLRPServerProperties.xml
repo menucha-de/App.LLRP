@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<invalid xmlns="urn:havis:llrp:server:properties:xsd:1">
+	<defaults>
+		<identificationSource>
+			<type>EPC</type>
+			<length>8</length>
+			<propertyName>mica.device.serial_no</propertyName>
+		</identificationSource>
+		<LLRPCapabilities>
+			<canDoRFSurvey>false</canDoRFSurvey>
+			<canReportBufferFillWarning>false</canReportBufferFillWarning>
+			<supportsClientRequestOpSpec>false</supportsClientRequestOpSpec>
+			<canDoTagInventoryStateAwareSingulation>false
+			</canDoTagInventoryStateAwareSingulation>
+			<supportsEventAndReportHolding>true</supportsEventAndReportHolding>
+			<maxPriorityLevelSupported>0</maxPriorityLevelSupported>
+			<clientRequestOpSpecTimeout>0</clientRequestOpSpecTimeout>
+			<maxNumROSpecs>0</maxNumROSpecs>
+			<maxNumSpecsPerROSpec>0</maxNumSpecsPerROSpec>
+			<maxNumInventoryParameterSpecsPerAISpec>0
+			</maxNumInventoryParameterSpecsPerAISpec>
+			<maxNumAccessSpecs>0</maxNumAccessSpecs>
+			<maxNumOpSpecsPerAccessSpec>0</maxNumOpSpecsPerAccessSpec>
+		</LLRPCapabilities>
+		<maxStartupRetries>5</maxStartupRetries>
+	</defaults>
+	<management>
+		<services>
+			<JMX>
+				<port>4711</port>
+			</JMX>
+		</services>
+	</management>
+	<output>
+		<latestConfigurationBaseDir>latestConfiguration
+		</latestConfigurationBaseDir>
+	</output>
+	<!-- in seconds -->
+	<unexpectedTimeout>60</unexpectedTimeout>
+</LLRPServerProperties>

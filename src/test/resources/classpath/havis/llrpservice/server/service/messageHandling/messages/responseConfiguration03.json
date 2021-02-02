@@ -1,0 +1,63 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetReaderConfigResponse", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "GET_READER_CONFIG_RESPONSE",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "status" : {
+      "parameterHeader" : {
+        "parameterType" : "LLRP_STATUS",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "statusCode" : "M_SUCCESS",
+      "errorDescriptionByteCount" : 0,
+      "errorDescription" : "",
+      "fieldError" : null,
+      "parameterError" : null
+    },
+    "identification" : null,
+    "antennaPropertiesList" : null,
+    "antennaConfigurationList" : [ "java.util.ArrayList", [ {
+      "parameterHeader" : {
+        "parameterType" : "ANTENNA_CONFIGURATION",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "antennaID" : 1,
+      "rfReceiver" : {
+        "parameterHeader" : {
+          "parameterType" : "RF_RECEIVER",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "receiverSensitivity" : 25
+      },
+      "rfTransmitter" : {
+        "parameterHeader" : {
+          "parameterType" : "RF_TRANSMITTER",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "hopTableID" : 1,
+        "channelIndex" : 1,
+        "transmitPower" : 15
+      },
+      "c1g2InventoryCommandList" : null,
+      "customList" : null
+    } ] ],
+    "readerEventNotificationSpec" : null,
+    "roReportSpec" : null,
+    "accessReportSpec" : null,
+    "llrpConfigurationStateValue" : null,
+    "keepaliveSpec" : null,
+    "gpiPortCurrentStateList" : null,
+    "gpoWriteDataList" : null,
+    "eventAndReports" : null,
+    "customList" : null
+  } ],
+  "parameter" : null
+}

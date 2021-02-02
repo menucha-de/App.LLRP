@@ -1,0 +1,31 @@
+{
+  "message" : null,
+  "parameter" : [ "havis.llrpservice.data.message.parameter.AntennaConfiguration", {
+    "parameterHeader" : {
+      "parameterType" : "ANTENNA_CONFIGURATION",
+      "parameterLength" : 0,
+      "reserved" : 0
+    },
+    "antennaID" : 1,
+    "rfReceiver" : {
+      "parameterHeader" : {
+        "parameterType" : "RF_RECEIVER",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "receiverSensitivity" : 25
+    },
+    "rfTransmitter" : {
+      "parameterHeader" : {
+        "parameterType" : "RF_TRANSMITTER",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "hopTableID" : 1,
+      "channelIndex" : 1,
+      "transmitPower" : 15
+    },
+    "c1g2InventoryCommandList" : null,
+    "customList" : null
+  } ]
+}

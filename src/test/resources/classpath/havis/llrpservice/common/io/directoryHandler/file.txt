@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<reports>
+	<q1:ECReports schemaVersion="1.1"
+		creationDate="2014-10-23T11:49:52.2311672+02:00" specName="ec001_de48c085998341f98c118c4421e37ff1"
+		date="2014-10-23T11:49:52.2311672+02:00" ALEID="Ha-VIS Middleware"
+		totalMilliseconds="50842" initiationCondition="REQUESTED"
+		terminationCondition="STABLE_SET" xmlns:q1="urn:epcglobal:ale:xsd:1">
+		<reports>
+			<report reportName="Report_TCR_R14">
+				<group>
+					<groupList>
+						<member>
+							<epc>urn:epc:id:sgtin:426025746.0001.1</epc>
+						</member>
+						<member>
+							<epc>urn:epc:id:sgtin:426025746.0001.2</epc>
+						</member>
+						<member>
+							<epc>urn:epc:id:sgtin:426025746.0001.3</epc>
+						</member>
+						<member>
+							<epc>urn:epc:raw:0.x</epc>
+						</member>
+					</groupList>
+					<groupCount>
+						<count>4</count>
+					</groupCount>
+				</group>
+			</report>
+		</reports>
+		<ECSpec schemaVersion="1.0" creationDate="2001-10-26T19:32:52Z"
+			includeSpecInReports="true">
+			<logicalReaders>
+				<logicalReader>reader001_de48c085998341f98c118c4421e37ff1</logicalReader>
+			</logicalReaders>
+			<boundarySpec>
+				<repeatPeriod unit="MS">45000</repeatPeriod>
+				<duration unit="MS">0</duration>
+				<stableSetInterval unit="MS">30000</stableSetInterval>
+			</boundarySpec>
+			<reportSpecs>
+				<reportSpec reportName="Report_TCR_R14" reportIfEmpty="true">
+					<reportSet set="CURRENT" />
+					<output includeEPC="true" includeCount="true" />
+				</reportSpec>
+			</reportSpecs>
+		</ECSpec>
+	</q1:ECReports>
+</reports>

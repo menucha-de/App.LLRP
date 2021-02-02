@@ -1,0 +1,6 @@
+Package: @Bundle-SymbolicName@
+Version: @Bundle-Version@
+Architecture: @ARCH@
+Depends: havis.device.io, havis.device.rf
+Maintainer: @Bundle-Vendor@
+Description: @Bundle-Name@

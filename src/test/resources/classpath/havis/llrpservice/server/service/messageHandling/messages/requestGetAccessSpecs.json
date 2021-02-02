@@ -1,0 +1,12 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetAccessSpecs", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "GET_ACCESSSPECS",
+      "messageLength" : 0,
+      "id" : 1
+    }
+  } ],
+  "parameter" : null
+}

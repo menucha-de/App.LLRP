@@ -1,0 +1,13 @@
+{
+  "message" : [ "havis.llrpservice.data.message.DisableAccessSpec", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "DISABLE_ACCESSSPEC",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "accessSpecID" : 1
+  } ],
+  "parameter" : null
+}

@@ -1,0 +1,8 @@
+{
+  "rfcCaps" : null,
+  "rfcConf" : [ "havis.device.rf.configuration.AntennaProperties", {
+    "id" : 1,
+    "gain" : 25,
+    "connected" : true
+  } ]
+}

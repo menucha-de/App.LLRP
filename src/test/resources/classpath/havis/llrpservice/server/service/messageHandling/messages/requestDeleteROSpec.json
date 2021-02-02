@@ -1,0 +1,13 @@
+{
+  "message" : [ "havis.llrpservice.data.message.DeleteROSpec", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "DELETE_ROSPEC",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "roSpecID" : 1
+  } ],
+  "parameter" : null
+}

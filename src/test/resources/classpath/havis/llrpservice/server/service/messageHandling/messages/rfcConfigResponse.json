@@ -1,0 +1,31 @@
+{
+  "rfcCaps" : null,
+  "rfcConf" : null,
+  "rfcMessage" : [ "havis.llrpservice.sbc.rfc.message.GetConfigurationResponse", {
+    "messageHeader" : {
+      "messageType" : "GET_CONFIGURATION_RESPONSE",
+      "id" : 1
+    },
+    "exception" : null,
+    "configuration" : [ "java.util.ArrayList", [ [ "havis.device.rf.configuration.AntennaConfiguration", {
+      "id" : 1,
+      "receiveSensitivity" : 25,
+      "transmitPower" : 15,
+      "hopTableID" : 1,
+      "channelIndex" : 1
+    } ], [ "havis.device.rf.configuration.AntennaProperties", {
+      "id" : 1,
+      "gain" : 25,
+      "connected" : true
+    } ], [ "havis.device.rf.configuration.GPIState", {
+      "portID" : 1,
+      "state" : "HIGH"
+    } ], [ "havis.device.rf.configuration.GPOState", {
+      "portID" : 1,
+      "state" : "HIGH"
+    } ], [ "havis.device.rf.configuration.KeepAliveConfiguration", {
+      "enable" : true,
+      "interval" : 10000
+    } ] ] ]
+  } ]
+}

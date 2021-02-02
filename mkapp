@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+set -x
+
+env
+
+. /usr/share/mkapp/functions
+
+for arch in $ARCH; do
+  set_env $arch
+  ant_build clean-all publish
+  if [ "$PUBLISH" ]; then
+    publish_ivy ivy
+    cd target/tar
+    dpkg-name *.deb
+    publish_deb *.deb
+    cd -
+  fi
+
+  if [ "$RELEASE" ]; then
+    cd target
+    APP=$(ls *.app)
+    APP=${APP%.app}
+    mv $APP.app ${APP}_${arch}.app
+    zip ../${APP}_${arch}.zip ${APP}_${arch}.app
+    cd -
+    echo "::set-output name=APP_${arch}::${APP}_${arch}.zip"
+  fi
+done

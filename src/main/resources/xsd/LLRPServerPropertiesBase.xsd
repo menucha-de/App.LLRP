@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:havis:llrp:server:properties:xsd:1"
+	elementFormDefault="qualified" xmlns="urn:havis:llrp:server:properties:xsd:1"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+
+	<xs:group name="defaultsGroup">
+		<xs:sequence>
+			<xs:element name="identificationSource" type="identificationSourceType" />
+			<xs:element name="LLRPCapabilities" type="LLRPCapabilitiesType" />
+			<xs:element name="maxStartupRetries" type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation>The count of retries for starting a service
+						instance after an error. Each retry is delayed: Before first retry
+						for 1 sec., before second retry for 2 seconds,...
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:simpleType name="identificationTypeEnumeration">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MAC_ADDRESS" />
+			<xs:enumeration value="EPC" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="identificationSourceType">
+		<xs:sequence>
+			<xs:element name="type" type="identificationTypeEnumeration" />
+			<xs:element name="length" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>EPC: The length of the byte array for the LLRP
+						identification parameter.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="propertyName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>EPC: The name of a system property that provides
+						the identifier. The identifier must be an 64 bit unsigned integer.
+						If no system property with this name exists then an environment
+						variable with the same name is used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LLRPCapabilitiesType">
+		<xs:sequence>
+			<xs:element name="canDoRFSurvey" type="xs:boolean" />
+			<xs:element name="canReportBufferFillWarning" type="xs:boolean" />
+			<xs:element name="supportsClientRequestOpSpec" type="xs:boolean" />
+			<xs:element name="canDoTagInventoryStateAwareSingulation"
+				type="xs:boolean" />
+			<xs:element name="supportsEventAndReportHolding" type="xs:boolean" />
+			<xs:element name="maxPriorityLevelSupported" type="xs:byte" />
+			<xs:element name="clientRequestOpSpecTimeout" type="xs:int" />
+			<xs:element name="maxNumROSpecs" type="xs:long" />
+			<xs:element name="maxNumSpecsPerROSpec" type="xs:long" />
+			<xs:element name="maxNumInventoryParameterSpecsPerAISpec"
+				type="xs:long" />
+			<xs:element name="maxNumAccessSpecs" type="xs:long" />
+			<xs:element name="maxNumOpSpecsPerAccessSpec" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

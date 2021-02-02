@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:havis:llrp:server:configuration:xsd:1"
+	elementFormDefault="qualified" xmlns="urn:havis:llrp:server:configuration:xsd:1"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+
+	<xs:element name="TestClass" type="TestClassType">
+	</xs:element>
+
+	<xs:complexType name="TestClassType">
+		<xs:sequence>
+			<xs:element name="abc" type="xs:string"></xs:element>
+			<xs:element name="efg" type="xs:int"></xs:element>
+			<xs:element name="innerClass" type="InnerClassType"></xs:element>
+			<xs:element name="enumeration" type="EnumerationType"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="InnerClassType">
+		<xs:sequence>
+			<xs:element name="foo" type="xs:string"></xs:element>
+			<xs:element name="bar" type="xs:int" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="EnumerationType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FIRST"></xs:enumeration>
+			<xs:enumeration value="SECOND"></xs:enumeration>
+			<xs:enumeration value="THIRD"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

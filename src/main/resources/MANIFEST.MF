@@ -1,0 +1,42 @@
+Bundle-Name: Ha-VIS LLRP Server
+Bundle-SymbolicName: havis.llrp-server
+Bundle-Version: 2.6.0
+Application-Name: LLRP
+Implementation-Version: 2.6
+Bundle-ManifestVersion: 2
+Bundle-Vendor: HARTING IT_SD
+Main-Class: havis.llrpservice.server.service.LLRPServiceManager
+Havis-Bundle: 
+ /OSGI-INF/havis.llrpservice-server.properties
+Bundle-Activator: havis.llrpservice.server.osgi.Activator
+Import-Package: 
+ com.fasterxml.jackson.core,
+ com.fasterxml.jackson.databind,
+ com.rits.cloning,
+ havis.device.io,
+ havis.device.io.exception,
+ havis.device.rf,
+ havis.device.rf.capabilities,
+ havis.device.rf.configuration,
+ havis.device.rf.exception,
+ havis.device.rf.tag,
+ havis.device.rf.tag.operation,
+ havis.device.rf.tag.result,
+ havis.llrpservice.data,
+ havis.llrpservice.data.message,
+ havis.llrpservice.data.message.parameter,
+ havis.llrpservice.data.message.parameter.serializer,
+ havis.llrpservice.data.message.serializer,
+ havis.util.platform,
+ javax.management,
+ javax.xml,
+ javax.xml.stream,
+ javax.xml.transform,
+ org.jibx.runtime,
+ org.jibx.runtime.impl,
+ org.osgi.framework;resolution:=optional,
+ org.osgi.util.tracker;resolution:=optional,
+ org.w3c.dom,
+ org.xml.sax,
+ sun.reflect
+

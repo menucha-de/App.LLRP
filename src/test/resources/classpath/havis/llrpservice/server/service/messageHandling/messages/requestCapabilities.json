@@ -1,0 +1,14 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetReaderCapabilities", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_1",
+      "messageType" : "GET_READER_CAPABILITIES",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "customExtensionPoint" : null,
+    "requestedData" : "ALL"
+  } ],
+  "parameter" : null
+}

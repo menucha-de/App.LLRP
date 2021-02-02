@@ -1,0 +1,73 @@
+{
+  "message" : null,
+  "parameter" : [ "havis.llrpservice.data.message.parameter.RegulatoryCapabilities", {
+    "parameterHeader" : {
+      "parameterType" : "REGULATORY_CAPABILITIES",
+      "parameterLength" : 0,
+      "reserved" : 0
+    },
+    "countryCode" : "CAYMAN_ISLANDS",
+    "communicationsStandard" : "ETSI_302_208",
+    "uhfBandCapabilities" : {
+      "parameterHeader" : {
+        "parameterType" : "UHF_BAND_CAPABILITIES",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "transmitPowerTable" : [ "java.util.ArrayList", [ {
+        "parameterHeader" : {
+          "parameterType" : "TRANSMIT_POWER_LEVEL_TABLE_ENTRY",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "index" : 1,
+        "transmitPowerValue" : 5
+      } ] ],
+      "frequencyInformation" : {
+        "parameterHeader" : {
+          "parameterType" : "FREQUENCY_INFORMATION",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "freqHopInfo" : null,
+        "fixedFreqInfo" : {
+          "parameterHeader" : {
+            "parameterType" : "FIXED_FREQUENCY_TABLE",
+            "parameterLength" : 0,
+            "reserved" : 0
+          },
+          "numFrequencies" : 0,
+          "frequency" : [ "java.util.ArrayList", [ 3 ] ]
+        },
+        "hopping" : false
+      },
+      "uhfC1G2RFModeTable" : [ "java.util.ArrayList", [ {
+        "parameterHeader" : {
+          "parameterType" : "UHF_C1G2_RF_MODE_TABLE",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "uhfC1G2RFModeSet" : [ "java.util.ArrayList", [ {
+          "parameterHeader" : {
+            "parameterType" : "UHF_C1G2_RF_MODE_TABLE_ENTRY",
+            "parameterLength" : 0,
+            "reserved" : 0
+          },
+          "modeIdentifier" : 0,
+          "drValue" : "_64DIV3",
+          "epcHAGConformance" : false,
+          "mValue" : "_2",
+          "forwardLinkModulation" : "DSB_ASK",
+          "spectralMaskIndicator" : "DENSE_INTERROGATOR_MODE_MASK",
+          "bdrValue" : 0,
+          "pieValue" : 0,
+          "minTariValue" : 0,
+          "maxTariValue" : 0,
+          "stepTariValue" : 0
+        } ] ]
+      } ] ],
+      "rfSurveyFrequencyCapabilities" : null
+    },
+    "customExtensionPoint" : null
+  } ]
+}

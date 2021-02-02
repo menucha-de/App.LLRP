@@ -1,0 +1,12 @@
+{
+  "message" : null,
+  "parameter" : [ "havis.llrpservice.data.message.parameter.GPOWriteData", {
+    "parameterHeader" : {
+      "parameterType" : "GPO_WRITE_DATA",
+      "parameterLength" : 0,
+      "reserved" : 0
+    },
+    "gpoPortNum" : 1,
+    "w" : false
+  } ]
+}

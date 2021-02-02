@@ -1,0 +1,83 @@
+{
+  "message" : null,
+  "parameter" : [ "havis.llrpservice.data.message.parameter.GeneralDeviceCapabilities", {
+    "parameterHeader" : {
+      "parameterType" : "GENERAL_DEVICE_CAPABILITIES",
+      "parameterLength" : 0,
+      "reserved" : 0
+    },
+    "deviceManufacturerName" : 1,
+    "modelName" : 2,
+    "firmwareVersion" : "3.0",
+    "maxNumberOfAntennasSupported" : 4,
+    "canSetAntennaProperties" : true,
+    "hasUTCClockCapability" : false,
+    "maximumReceiveSensitivity" : null,
+    "gpioCapabilities" : {
+      "parameterHeader" : {
+        "parameterType" : "GPIO_CAPABILITIES",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "numGPIs" : 1,
+      "numGPOs" : 2
+    },
+    "receiveSensitivityTableEntry" : [ "java.util.ArrayList", [ {
+      "parameterHeader" : {
+        "parameterType" : "RECEIVE_SENSITIVITY_TABLE_ENTRY",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "index" : 1,
+      "receiveSensitivityValue" : 25
+    } ] ],
+    "perAntennaReceiveSensitivityRange" : [ "java.util.ArrayList", [ {
+      "parameterHeader" : {
+        "parameterType" : "PER_ANTENNA_RECEIVE_SENSITIVITY_RANGE",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "antennaID" : 1,
+      "receiveSensitivityIndexMin" : 5,
+      "receiveSensitivityIndexMax" : 10
+    } ] ],
+    "perAntennaAirProtocol" : [ "java.util.ArrayList", [ {
+      "parameterHeader" : {
+        "parameterType" : "PER_ANTENNA_AIR_PROTOCOL",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "antennaID" : 1,
+      "numProtocols" : 0,
+      "airProtocolsSupported" : [ "java.util.ArrayList", [ "EPC_GLOBAL_C1G2" ] ]
+    }, {
+      "parameterHeader" : {
+        "parameterType" : "PER_ANTENNA_AIR_PROTOCOL",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "antennaID" : 2,
+      "numProtocols" : 0,
+      "airProtocolsSupported" : [ "java.util.ArrayList", [ "EPC_GLOBAL_C1G2" ] ]
+    }, {
+      "parameterHeader" : {
+        "parameterType" : "PER_ANTENNA_AIR_PROTOCOL",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "antennaID" : 3,
+      "numProtocols" : 0,
+      "airProtocolsSupported" : [ "java.util.ArrayList", [ "EPC_GLOBAL_C1G2" ] ]
+    }, {
+      "parameterHeader" : {
+        "parameterType" : "PER_ANTENNA_AIR_PROTOCOL",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "antennaID" : 4,
+      "numProtocols" : 0,
+      "airProtocolsSupported" : [ "java.util.ArrayList", [ "EPC_GLOBAL_C1G2" ] ]
+    } ] ],
+    "firmwareVersionByteCount" : 0
+  } ]
+}

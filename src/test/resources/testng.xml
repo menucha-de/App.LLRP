@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Test Suite">
+	<test name="Test">
+		<packages>
+			<package name="havis.llrpservice.common.concurrent" />
+			<package name="havis.llrpservice.common.entityManager" />
+			<package name="havis.llrpservice.common.fsm" />
+			<package name="havis.llrpservice.common.ids" />
+			<package name="havis.llrpservice.common.io" />
+			<package name="havis.llrpservice.common.json" />
+			<package name="havis.llrpservice.common.logback" />
+			<package name="havis.llrpservice.common.serializer" />
+			<package name="havis.llrpservice.common.tcp" />
+			<package name="havis.llrpservice.csc.llrp" />
+			<package name="havis.llrpservice.sbc.rfc" />
+			<package name="havis.llrpservice.sbc.service" />
+			<package name="havis.llrpservice.server.configuration" />
+			<package name="havis.llrpservice.server.event" />
+			<package name="havis.llrpservice.server.llrp" />
+			<package name="havis.llrpservice.server.management" />
+			<package name="havis.llrpservice.server.persistence" />
+			<package name="havis.llrpservice.server.platform" />
+			<package name="havis.llrpservice.server.rfc" />
+			<package name="havis.llrpservice.server.service" />
+			<package name="havis.llrpservice.server.service.fsm" />
+			<package name="havis.llrpservice.server.service.messageHandling" />			
+		</packages>
+	</test>
+</suite>

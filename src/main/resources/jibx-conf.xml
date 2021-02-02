@@ -1,0 +1,8 @@
+<schema-set>
+	<class-decorator class="org.jibx.schema.codegen.extend.SerializableDecorator" />
+	<schema-set package="havis.llrpservice.xml.common" names="LLRPServerCommon.xsd" />
+	<schema-set package="havis.llrpservice.xml.configuration"
+		names="*Configuration*.xsd" />
+	<schema-set package="havis.llrpservice.xml.properties"
+		names="*Properties*.xsd" />
+</schema-set>

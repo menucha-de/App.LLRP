@@ -1,0 +1,13 @@
+{
+  "message" : null,
+  "parameter" : [ "havis.llrpservice.data.message.parameter.GPIPortCurrentState", {
+    "parameterHeader" : {
+      "parameterType" : "GPI_PORT_CURRENT_STATE",
+      "parameterLength" : 0,
+      "reserved" : 0
+    },
+    "gpiPortNum" : 1,
+    "gpiConfig" : false,
+    "state" : "HIGH"
+  } ]
+}

@@ -1,0 +1,13 @@
+{
+  "message" : null,
+  "parameter" : [ "havis.llrpservice.data.message.parameter.ROSpecEvent", {
+    "parameterHeader" : {
+      "parameterType" : "RO_SPEC_EVENT",
+      "parameterLength" : 0,
+      "reserved" : 0
+    },
+    "eventType" : "START_OF_ROSPEC",
+    "roSpecID" : 999,
+    "preemptingROSpecID" : 0
+  } ]
+}

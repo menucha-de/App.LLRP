@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:havis:llrp:server:properties:xsd:1"
+	elementFormDefault="qualified" xmlns="urn:havis:llrp:server:properties:xsd:1"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="urn:havis:llrp:server:common:xsd:1"
+	version="1.0">
+	<xs:annotation>
+		<xs:documentation>The description of the server properties structure.
+			The properties are the static configuration part which cannot be
+			changed at runtime. The server properties file must be placed in the
+			class path. The default location is
+			havis-llrpservice/LLRPServerProperties.xml. The server properties
+			contain the default settings for the service instances
+			(LLRPServerInstanceProperties.xsd).
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import namespace="urn:havis:llrp:server:common:xsd:1"
+		schemaLocation="./LLRPServerCommon.xsd" />
+	<xs:include schemaLocation="./LLRPServerPropertiesBase.xsd" />
+
+	<xs:element name="LLRPServerProperties" type="LLRPServerPropertiesType" />
+
+	<xs:complexType name="LLRPServerPropertiesType">
+		<xs:sequence>
+			<xs:element name="defaults" type="defaultsType">
+				<xs:annotation>
+					<xs:documentation>Default properties for the server and instance
+						configurations
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="management" type="managementType"
+				minOccurs="0" />
+			<xs:element name="output" type="outputType" />
+			<xs:element name="unexpectedTimeout" type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation> This time out (in seconds) should never occur in
+						normal operation. It protects the application for dead locks. The
+						value must be much greater than all other configured time outs.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemaVersion" type="common:schemaVersionType">
+			<xs:annotation>
+				<xs:documentation> If the attribute does not exists the newest
+					supported version of the server implementation is assumed.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="defaultsType">
+		<xs:sequence>
+			<xs:group ref="defaultsGroup"></xs:group>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="outputType">
+		<xs:sequence>
+			<xs:element name="latestConfigurationBaseDir" type="xs:string">
+				<xs:annotation>
+					<xs:documentation> The directory path to the latest stored
+						configuration files. A relative file path starts at the directory
+						with the server properties file.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="managementType">
+		<xs:sequence>
+			<xs:element name="services" type="servicesType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="servicesType">
+		<xs:sequence>
+			<xs:element name="JMX" type="jmxType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="jmxType">
+		<xs:sequence>
+			<xs:element name="port" type="xs:unsignedInt" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

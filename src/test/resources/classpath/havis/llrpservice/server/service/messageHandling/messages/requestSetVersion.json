@@ -1,0 +1,13 @@
+{
+  "message" : [ "havis.llrpservice.data.message.SetProtocolVersion", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_1",
+      "messageType" : "SET_PROTOCOL_VERSION",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "protocolVersion" : "LLRP_V1_1"
+  } ],
+  "parameter" : null
+}

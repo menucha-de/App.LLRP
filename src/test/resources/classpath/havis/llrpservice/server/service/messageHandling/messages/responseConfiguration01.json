@@ -1,0 +1,196 @@
+{
+  "message" : [ "havis.llrpservice.data.message.GetReaderConfigResponse", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "GET_READER_CONFIG_RESPONSE",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "status" : {
+      "parameterHeader" : {
+        "parameterType" : "LLRP_STATUS",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "statusCode" : "M_SUCCESS",
+      "errorDescriptionByteCount" : 0,
+      "errorDescription" : "",
+      "fieldError" : null,
+      "parameterError" : null
+    },
+    "identification" : null,
+    "antennaPropertiesList" : [ "java.util.ArrayList", [ {
+      "parameterHeader" : {
+        "parameterType" : "ANTENNA_PROPERTIES",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "connected" : true,
+      "antennaID" : 1,
+      "antennaGain" : 25
+    } ] ],
+    "antennaConfigurationList" : [ "java.util.ArrayList", [ {
+      "parameterHeader" : {
+        "parameterType" : "ANTENNA_CONFIGURATION",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "antennaID" : 1,
+      "rfReceiver" : {
+        "parameterHeader" : {
+          "parameterType" : "RF_RECEIVER",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "receiverSensitivity" : 25
+      },
+      "rfTransmitter" : {
+        "parameterHeader" : {
+          "parameterType" : "RF_TRANSMITTER",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "hopTableID" : 1,
+        "channelIndex" : 1,
+        "transmitPower" : 15
+      },
+      "c1g2InventoryCommandList" : null,
+      "customList" : null
+    } ] ],
+    "readerEventNotificationSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "READER_EVENT_NOTIFICATION_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "eventNotificationStateList" : [ "java.util.ArrayList", [ {
+        "parameterHeader" : {
+          "parameterType" : "EVENT_NOTIFICATION_STATE",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "eventType" : "ROSPEC_EVENT",
+        "notificationState" : false
+      },
+      {
+        "parameterHeader" : {
+          "parameterType" : "EVENT_NOTIFICATION_STATE",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "eventType" : "GPI_EVENT",
+        "notificationState" : false
+      },
+      {
+        "parameterHeader" : {
+          "parameterType" : "EVENT_NOTIFICATION_STATE",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "eventType" : "READER_EXCEPTION_EVENT",
+        "notificationState" : false
+      } ] ]
+    },
+    "roReportSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "RO_REPORT_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "roReportTrigger" : "UPON_N_TAGREPORTDATA_PARAMETERS_OR_END_OF_ROSPEC",
+      "n" : 1,
+      "tagReportContentSelector" : {
+        "parameterHeader" : {
+          "parameterType" : "TAG_REPORT_CONTENT_SELECTOR",
+          "parameterLength" : 0,
+          "reserved" : 0
+        },
+        "enableROSpecID" : true,
+        "enableSpecIndex" : true,
+        "enableInventoryParameterSpecID" : true,
+        "enableAntennaID" : true,
+        "enableChannelIndex" : true,
+        "enablePeakRSSI" : true,
+        "enableFirstSeenTimestamp" : false,
+        "enableLastSeenTimestamp" : false,
+        "enableTagSeenCount" : false,
+        "enableAccessSpecID" : true,
+        "c1g2EPCMemorySelectorList" : [ "java.util.ArrayList", [ {
+          "parameterHeader" : {
+            "parameterType" : "C1G2_EPC_MEMORY_SELECTOR",
+            "parameterLength" : 0,
+            "reserved" : 0
+          },
+          "enableCRC" : true,
+          "enablePCBits" : true,
+          "enableXPCBits" : false
+        } ] ],
+        "cusList" : null
+      },
+      "customList" : null
+    },
+    "accessReportSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "ACCESS_REPORT_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "accessReportTrigger" : "WHENEVER_ROREPORT_IS_GENERATED"
+    },
+    "llrpConfigurationStateValue" : {
+      "parameterHeader" : {
+        "parameterType" : "LLRP_CONFIGURATION_STATE_VALUE",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "llrpConfigStateValue" : 0
+    },
+    "keepaliveSpec" : {
+      "parameterHeader" : {
+        "parameterType" : "KEEPALIVE_SPEC",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "triggerType" : "NULL",
+      "timeInterval" : 0
+    },
+    "gpiPortCurrentStateList" : [ "java.util.ArrayList", [ {
+      "parameterHeader" : {
+        "parameterType" : "GPI_PORT_CURRENT_STATE",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "gpiPortNum" : 1,
+      "gpiConfig" : true,
+      "state" : "HIGH"
+    } ] ],
+    "gpoWriteDataList" : [ "java.util.ArrayList", [ {
+      "parameterHeader" : {
+        "parameterType" : "GPO_WRITE_DATA",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "gpoPortNum" : 2,
+      "gpoState" : false
+    }, {
+      "parameterHeader" : {
+        "parameterType" : "GPO_WRITE_DATA",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "gpoPortNum" : 3,
+      "gpoState" : true
+    } ] ],
+    "eventAndReports" : {
+      "parameterHeader" : {
+        "parameterType" : "EVENTS_AND_REPORTS",
+        "parameterLength" : 0,
+        "reserved" : 0
+      },
+      "hold" : false
+    },
+    "customList" : null
+  } ],
+  "parameter" : null
+}

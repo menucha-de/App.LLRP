@@ -1,0 +1,22 @@
+{
+  "message" : null,
+  "parameter" : [ "havis.llrpservice.data.message.parameter.LLRPCapabilities", {
+    "parameterHeader" : {
+      "parameterType" : "LLRP_CAPABILITIES",
+      "parameterLength" : 0,
+      "reserved" : 0
+    },
+    "canDoRFSurvey" : false,
+    "canReportBufferFillWarning" : false,
+    "supportsClientRequestOpSpec" : false,
+    "canDoTagInventoryStateAwareSingulation" : false,
+    "supportsEventAndReportHolding" : false,
+    "maxPriorityLevelSupported" : 0,
+    "clientRequestOpSpecTimeout" : 0,
+    "maxNumROSpecs" : 0,
+    "maxNumSpecsPerROSpec" : 0,
+    "maxNumInventoryParameterSpecsPerAISpec" : 0,
+    "maxNumAccessSpecs" : 0,
+    "maxNumOpSpecsPerAccessSpec" : 0
+  } ]
+}

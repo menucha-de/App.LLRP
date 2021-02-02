@@ -1,0 +1,15 @@
+{
+  "message" : [ "havis.llrpservice.data.message.CustomMessage", {
+    "messageHeader" : {
+      "reserved" : 0,
+      "version" : "LLRP_V1_0_1",
+      "messageType" : "CUSTOM_MESSAGE",
+      "messageLength" : 0,
+      "id" : 1
+    },
+    "vendorIdentifier" : 123,
+    "messageSubType" : 567,
+    "vendorPayload" : ""
+  } ],
+  "parameter" : null
+}

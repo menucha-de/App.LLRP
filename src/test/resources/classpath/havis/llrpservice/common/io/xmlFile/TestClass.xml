@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestClass xmlns="urn:havis:llrp:server:configuration:xsd:1">
+  <abc>abc</abc>
+  <efg>0</efg>
+  <innerClass>
+    <foo>foo</foo>
+    <bar>0</bar>
+  </innerClass>
+  <enumeration>FIRST</enumeration>
+</TestClass>
