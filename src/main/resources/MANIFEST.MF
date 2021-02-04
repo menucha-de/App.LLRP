@@ -1,8 +1,8 @@
 Bundle-Name: Ha-VIS LLRP Server
 Bundle-SymbolicName: havis.llrp-server
-Bundle-Version: 2.6.0
+Bundle-Version: 2.7.0
 Application-Name: LLRP
-Implementation-Version: 2.6
+Implementation-Version: 2.7
 Bundle-ManifestVersion: 2
 Bundle-Vendor: HARTING IT_SD
 Main-Class: havis.llrpservice.server.service.LLRPServiceManager
