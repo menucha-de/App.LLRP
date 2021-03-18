@@ -4,7 +4,7 @@ Bundle-Version: 2.7.0
 Application-Name: LLRP
 Implementation-Version: 2.7
 Bundle-ManifestVersion: 2
-Bundle-Vendor: HARTING IT_SD
+Bundle-Vendor: Menucha Team <info@menucha.de>
 Main-Class: havis.llrpservice.server.service.LLRPServiceManager
 Havis-Bundle: 
  /OSGI-INF/havis.llrpservice-server.properties
